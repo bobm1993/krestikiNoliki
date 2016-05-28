@@ -12,11 +12,21 @@ def game(request):
     if request.GET.get('started') == '1':
         for i in range(size):
             for j in range(size):
-                matrix[i][j] = int(request.GET.get(str(i)+str(j)))
+                matrix[i][j] = int(request.GET.get(str(i) + str(j)))
+
+    counter = 0
+    for i in range(size):
+        for j in range(size):
+            counter += matrix[i][j]
+
+    if counter % 3 == 0:
+        icon = "X"
+    else:
+        icon = "O"
 
     return render(request, 'krestikiNolikiApp/game.html', {
-            'icon': 'X',
-            'size': size,
-            'range': range(size),
-            'matrix': matrix
-        })
+        'icon': icon,
+        'size': size,
+        'range': range(size),
+        'matrix': matrix
+    })
