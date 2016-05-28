@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body>
+    <form id="user_choice" action="game.html" method="get">
+        <button type="submit">Start a new game!</button>
+        <label for="size">Size of the board:</label>
+        <select name="size" id="size">
+            <option value="3">3x3</option>
+            <option value="4">4x4</option>
+            <option value="5">5x5</option>
+            <option value="6">6x6</option>
+            <option value="7">7x7</option>
+            <option value="8">8x8</option>
+            <option value="9">9x9</option>
+        </select>
+        <label for="row">Row to win:</label>
+        <select name="row" id="row">
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+        </select>
+        <label for="diagonal">Ability to win by diagonal</label>
+        <input id="diagonal" name="diagonal" type="checkbox" checked>
+    </form>
+</body>
+</html>
