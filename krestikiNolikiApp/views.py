@@ -68,28 +68,33 @@ def check_win(pl, m, n, diagonal, num):  # проверка на выиграш�
         all(b[i] == b[i + j] for j in lst)
         for k in lst:
             one_win.append(b[i + k])
-        win.append(one_win)  # выиграши по горизонтали
+        win.append(one_win)  # выиграши по вертикали
     for i in range(0, n):
         lst = range(0, n ** 2 - n + 1, n)
         one_win = []
         all(b[i] == b[i + j] for j in lst)
         for k in lst:
             one_win.append(b[i + k])
-        win.append(one_win)  # выиграши по вертикали
+        win.append(one_win)  # выиграши по горизнтали
     if diagonal == 'on':
-        for i in range(0, n, n):
-            lst = range(0, n ** 2, n + 1)
+        di1 = list(range(0, n * (n - 2), n)) + list(range(1, n - 2))
+        for i in di1:
+            lst = range(i, n ** 2, n + 1)
             one_win = []
-            all(b[i] == b[i + j] for j in lst)
+            all(b[i] == b[j] for j in lst)
             for k in lst:
-                one_win.append(b[i + k])
+                one_win.append(b[k])
             win.append(one_win)  # диагональ слева направо
-        for i in range(n - 1, n):
-            lst = list(range(0, n ** 2 - n, n - 1))
+        di2 = list(range(n - 1, n * (n - 2), n)) + list(range(2, n - 1))
+        for i in di2:
+            if i < n:
+                lst = range(i, n * i + 1, n - 1)
+            else:
+                lst = range(i, n ** 2, n - 1)
             one_win = []
-            all(b[i] == b[i + j] for j in lst)
+            all(b[i] == b[j] for j in lst)
             for k in lst:
-                one_win.append(b[i + k])
+                one_win.append(b[k])
             win.append(one_win)  # диагональ справа налево
     for i in win:
         count = 0
