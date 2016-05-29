@@ -25,12 +25,12 @@ def game(request):
         for j in range(size):
             counter += matrix[i][j]
 
-    if counter % 3 == 0:
+    if request.GET.get('stroke') == 'X':
+        icon = "0"
+        icon_int = 1
+    else:
         icon = "X"
         icon_int = 2
-    else:
-        icon = "O"
-        icon_int = 1
 
     diagonal = request.GET.get('diagonal')
     row = int(request.GET.get('row'))
