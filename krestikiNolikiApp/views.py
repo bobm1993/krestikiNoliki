@@ -1,4 +1,6 @@
+import math
 from django.shortcuts import render
+import itertools
 
 
 def home(request):
@@ -34,15 +36,11 @@ def game(request):
 
     winner = check_win(icon_int, matrix, size, diagonal, row)
 
-    matrix_one_row = []
-    for i in matrix:
-        for j in i:
-            matrix_one_row.append(j)
-    matrix_str = str(matrix_one_row)
+    matrix_str = str(mat_to_str(matrix))
 
     if winner > 0:
-        handle = open('F:/file.txt', 'a+')
-        handle.write(matrix_str + "\n")
+        handle = open('file.txt', 'a+')
+        handle.write(str(matrix_str).strip('[]') + "\n")
         handle.close()
 
     return render(request, 'krestikiNolikiApp/game.html', {
@@ -56,12 +54,26 @@ def game(request):
     })
 
 
+def history(request):
+    handle = open('file.txt', 'r')
+    hist_str = handle.read()
+    hist_arr = hist_str.split('\n')
+    hist_rev = hist_arr[::-1]
+    # hist = hist_rev[1:11]
+    hist = [game.split(', ') for game in hist_rev[1:11]]
+    sizes = []
+    for h in hist:
+        sizes.append(math.sqrt(len(h)))
+
+    return render(request, 'krestikiNolikiApp/history.html', {
+        'hist': hist,
+        'sizes': sizes
+    })
+
+
 def check_win(pl, m, n, diagonal, num):  # проверка на выиграшные комбинации
     win = []
-    b = []
-    for i in m:
-        for j in i:
-            b.append(j)
+    b = mat_to_str(m)
     for i in range(n):
         lst = range(n)
         one_win = []
@@ -84,7 +96,7 @@ def check_win(pl, m, n, diagonal, num):  # проверка на выиграш�
             all(b[i] == b[j] for j in lst)
             for k in lst:
                 one_win.append(b[k])
-            win.append(one_win)  # диагональ слева направо
+            win.append(one_win)  # диагонали слева направо
         di2 = list(range(n - 1, n * (n - 2), n)) + list(range(2, n - 1))
         for i in di2:
             if i < n:
@@ -95,7 +107,7 @@ def check_win(pl, m, n, diagonal, num):  # проверка на выиграш�
             all(b[i] == b[j] for j in lst)
             for k in lst:
                 one_win.append(b[k])
-            win.append(one_win)  # диагональ справа налево
+            win.append(one_win)  # диагонали справа налево
     for i in win:
         count = 0
         for j in i:
@@ -106,3 +118,11 @@ def check_win(pl, m, n, diagonal, num):  # проверка на выиграш�
             if count >= num:
                 return pl
     return False
+
+
+def mat_to_str(mat):
+    mat_str = []
+    for i in mat:
+        for j in i:
+            mat_str.append(j)
+    return mat_str

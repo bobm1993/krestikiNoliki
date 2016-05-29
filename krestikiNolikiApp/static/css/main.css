@@ -1,0 +1,28 @@
+.game-row {
+    clear: both;
+    margin: 50px 0 0 50px;
+}
+
+#game button {
+    height: 50px;
+    width: 50px;
+    padding: 0;
+    border: 1px solid #eee;
+    background: none;
+    margin: -1px 0 0 -1px;
+    display: block;
+    float: left;
+}
+
+.modal-footer > a {
+    float: left;
+}
+
+form.replay {
+    display: inline;
+}
+
+.row {
+    display: none;
+    margin: 0 5px;
+}
