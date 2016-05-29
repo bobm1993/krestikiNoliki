@@ -3,11 +3,8 @@ from django.shortcuts import render
 
 def home(request):
     range_size = range(3, 10)
-    # size = int(request.GET.get('size', '3'))
-    # range_win = range(3, size+1)
     return render(request, 'krestikiNolikiApp/home.html', {
-        'range_size': range_size,
-        # 'range_win': range_win
+        'range_size': range_size
     })
 
 
@@ -36,6 +33,17 @@ def game(request):
     row = int(request.GET.get('row'))
 
     winner = check_win(icon_int, matrix, size, diagonal, row)
+
+    matrix_one_row = []
+    for i in matrix:
+        for j in i:
+            matrix_one_row.append(j)
+    matrix_str = str(matrix_one_row)
+
+    if winner > 0:
+        handle = open('F:/file.txt', 'a+')
+        handle.write(matrix_str + "\n")
+        handle.close()
 
     return render(request, 'krestikiNolikiApp/game.html', {
         'icon': icon,

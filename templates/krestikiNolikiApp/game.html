@@ -24,6 +24,14 @@
             display: block;
             float: left;
         }
+
+        .modal-footer > a {
+            float: left;
+        }
+
+        form.replay {
+            display: inline;
+        }
     </style>
 </head>
 <body>
@@ -59,11 +67,16 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Modal title</h4></div>
-                <div class="modal-body"><p>One fine body…</p></div>
+                    <h4 class="modal-title">{% if winner == 1 %}Cross{% else %}Zero{% endif %} won the game!</h4></div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <a href="/" class="btn btn-default">Home</a>
+                    <a href="/history" class="btn btn-default">History</a>
+                    <form class="replay">
+                        <button class="btn btn-primary">Replay</button>
+                        <input type="hidden" name="size" value="{{ size }}">
+                        <input type="hidden" name="row" value="{{ row }}">
+                        <input type="hidden" name="diagonal" value="{{ diagonal }}">
+                    </form>
                 </div>
             </div>
         </div>
