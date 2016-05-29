@@ -9,30 +9,45 @@
     <script src="{% static 'js/main.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <style>
+        .game-row {
+            clear: both;
+        }
+
+        #game button {
+           height: 50px;
+            width: 50px;
+            padding: 0;
+            border: 1px solid #eee;
+            background: none;
+            margin: -1px 0 0 -1px;
+            display: block;
+            float: left;
+        }
+    </style>
 </head>
 <body>
 <div>
     {% if icon == 'X' %}Cross{% else %}Zero{% endif %} stroke!
 </div>
-<form method="get">
-    <table>
+<form id="game" method="get">
+    <div>
         {% for i in range %}
-            <tr>
+            <div class="game-row">
                 {% for j in range %}
-                    <td>
-                        <button>
-                            {% if matrix|index:forloop.parentloop.counter0|index:forloop.counter0 == 0 %}
-                            {% elif matrix|index:forloop.parentloop.counter0|index:forloop.counter0 == 1 %}X
-                            {% else %}O{% endif %}
-                        </button>
-                        <input type="hidden"
-                               name="{{ forloop.parentloop.counter0 }}{{ forloop.counter0 }}"
-                               value="{{ matrix|index:forloop.parentloop.counter0|index:forloop.counter0 }}">
-                    </td>
+                    <button {% if matrix|index:forloop.parentloop.counter0|index:forloop.counter0 > 0 %}
+                        disabled {% endif %}>
+                        {% if matrix|index:forloop.parentloop.counter0|index:forloop.counter0 == 0 %}
+                        {% elif matrix|index:forloop.parentloop.counter0|index:forloop.counter0 == 1 %}X
+                        {% else %}O{% endif %}
+                    </button>
+                    <input type="hidden"
+                           name="{{ forloop.parentloop.counter0 }}{{ forloop.counter0 }}"
+                           value="{{ matrix|index:forloop.parentloop.counter0|index:forloop.counter0 }}">
                 {% endfor %}
-            </tr>
+            </div>
         {% endfor %}
-    </table>
+    </div>
     <input type="hidden" name="started" value="1">
     <input type="hidden" name="size" value="{{ size }}">
     <input type="hidden" name="diagonal" value="{{ diagonal }}">

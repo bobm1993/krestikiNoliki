@@ -1,9 +1,18 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>home</title>
+    <script src="{% static 'js/jquery-2.2.4.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <style>
+        .row {
+            display: none;
+            margin: 0 5px;
+        }
+    </style>
 </head>
     <body>
         <form id="user_choice" action="game.html" method="get">
@@ -14,12 +23,15 @@
                     <option value="{{ i }}" {% if x == 3 %}selected{% endif %}>{{ i }}x{{ i }}</option>
                 {% endfor %}
             </select>
-            <label for="row">Row to win:</label>
-            <select name="row" id="row">
-                {% for i in range_size %}
-                    <option value="{{ i }}" {% if x == 3 %}selected{% endif %}>{{ i }}</option>
-                {% endfor %}
-            </select>
+            <label class="row" for="row">
+                Row to win:
+                <select name="row" id="row">
+                    {% for i in range_size %}
+                        <option value="{{ i }}" {% if x == 3 %}selected{% endif %}>{{ i }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+
             <label for="diagonal">Ability to win by diagonal</label>
             <input id="diagonal" name="diagonal" type="checkbox" checked>
         </form>
