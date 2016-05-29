@@ -11,14 +11,17 @@
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
 </head>
     <body>
-        <form id="user_choice" action="game.html" method="get">
-            <button type="submit">Start a new game!</button>
+        <form class="user_choice" action="game.html" method="get">
+            <a href="/history" class="btn btn-default">History</a>
+            <button type="submit" class="btn btn-primary">Start a new game!</button>
             <label for="size">Size of the board:</label>
             <select name="size" id="size">
                 {% for i in range_size %}
                     <option value="{{ i }}" {% if x == 3 %}selected{% endif %}>{{ i }}x{{ i }}</option>
                 {% endfor %}
             </select>
+            <label for="diagonal">Ability to win by diagonal</label>
+            <input id="diagonal" name="diagonal" type="checkbox" checked>
             <label class="row" for="row">
                 Row to win:
                 <select name="row" id="row">
@@ -27,9 +30,6 @@
                     {% endfor %}
                 </select>
             </label>
-
-            <label for="diagonal">Ability to win by diagonal</label>
-            <input id="diagonal" name="diagonal" type="checkbox" checked>
         </form>
     </body>
 </html>

@@ -26,3 +26,32 @@ form.replay {
     display: none;
     margin: 0 5px;
 }
+
+.history-game {
+    margin: 50px;
+}
+
+.history-row {
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.field {
+    float: left;
+    width: 30px;
+    height: 30px;
+    display: block;
+}
+
+form.user_choice {
+    width: 800px;
+    margin: 200px auto 0;
+}
+
+form.user_choice > a {
+    margin-right: 50px;
+}
+
+div > h2 {
+    margin-left: 30px;
+}

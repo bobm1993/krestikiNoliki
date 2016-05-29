@@ -16,4 +16,6 @@ $(document).ready(function() {
         $(event.currentTarget).next().val(icon === 'X' ? 1 : 2);
     })
 
+    $('#myModal').modal({backdrop: 'static', keyboard: false})
+
 });

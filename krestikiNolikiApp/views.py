@@ -1,6 +1,4 @@
-import math
 from django.shortcuts import render
-import itertools
 
 
 def home(request):
@@ -59,15 +57,21 @@ def history(request):
     hist_str = handle.read()
     hist_arr = hist_str.split('\n')
     hist_rev = hist_arr[::-1]
-    # hist = hist_rev[1:11]
-    hist = [game.split(', ') for game in hist_rev[1:11]]
-    sizes = []
-    for h in hist:
-        sizes.append(math.sqrt(len(h)))
+    hist_num = [game.split(', ') for game in hist_rev[1:11]]
+    hist = []
+    for i in hist_num:
+        hist_temp = []
+        for j in i:
+            if j == '0':
+                hist_temp.append('')
+            elif j == '1':
+                hist_temp.append('X')
+            else:
+                hist_temp.append('O')
+        hist.append(hist_temp)
 
     return render(request, 'krestikiNolikiApp/history.html', {
-        'hist': hist,
-        'sizes': sizes
+        'hist': hist
     })
 
 
