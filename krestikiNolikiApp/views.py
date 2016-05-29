@@ -43,7 +43,8 @@ def game(request):
         'range': range(size),
         'matrix': matrix,
         'diagonal': diagonal,
-        'row': row
+        'row': row,
+        'winner': winner
     })
 
 
