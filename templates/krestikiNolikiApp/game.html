@@ -40,12 +40,13 @@
     <input id="icon" type="hidden" name="stroke" value="{{ icon }}">
 </form>
 
-{% if winner == 1 or winner == 2 %}
+{% if winner == 1 or winner == 2 or winner == 3 %}
     <div class="modal fade in" style="display: block;">
         <div class="modal-dialog" id="myModal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">{% if winner == 1 %}Cross{% else %}Zero{% endif %} won the game!</h4></div>
+                    <h4 class="modal-title">{% if winner == 1 %}Cross won the game!
+                    {% elif winner == 2 %}Zero won the game!{% else %}Draw!{% endif %}</h4></div>
                 <div class="modal-footer">
                     <a href="/" class="btn btn-default">Home</a>
                     <a href="/history" class="btn btn-default">History</a>

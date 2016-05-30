@@ -81,14 +81,14 @@ def check_win(pl, m, n, diagonal, num):  # проверка на выиграш�
     for i in range(0, n ** 2, n):
         lst = range(n)
         one_win = []
-        if all(b[i] == b[i + j] for j in lst) and b[i] != 0:
+        if b[i] != 0:
             for k in lst:
                 one_win.append(b[i + k])
             win.append(one_win)  # выиграши по горизонтали
     for i in range(n):
         lst = range(0, n ** 2 - n + 1, n)
         one_win = []
-        if all(b[i] == b[i + j] for j in lst) and b[i] != 0:
+        if b[i] != 0:
             for k in lst:
                 one_win.append(b[i + k])
             win.append(one_win)  # выиграши по вертикали
@@ -97,7 +97,7 @@ def check_win(pl, m, n, diagonal, num):  # проверка на выиграш�
         for i in di1:
             lst = range(i, n ** 2, n + 1)
             one_win = []
-            if all(b[i] == b[j] for j in lst):
+            if b[i] != 0:
                 for k in lst:
                     one_win.append(b[k])
                 win.append(one_win)  # диагонали слева направо
@@ -108,7 +108,7 @@ def check_win(pl, m, n, diagonal, num):  # проверка на выиграш�
             else:
                 lst = range(i, n ** 2, n - 1)
             one_win = []
-            if all(b[i] == b[j] for j in lst) and b[i] != 0:
+            if b[i] != 0:
                 for k in lst:
                     one_win.append(b[k])
                 win.append(one_win)  # диагонали справа налево
@@ -121,6 +121,8 @@ def check_win(pl, m, n, diagonal, num):  # проверка на выиграш�
                 count = 0
             if count >= num:
                 return pl
+    if 0 not in b:
+        return 3
     return False
 
 
