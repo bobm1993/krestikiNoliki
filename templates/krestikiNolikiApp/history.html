@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="history-game">
-        <a href="/home" class="btn btn-default">Home</a>
+        <a href="/" class="btn btn-default">Home</a>
         <h2>Last 10 games</h2>
         {% for game in hist %}
             <div class="history-row" style="width: {{ game|length  }}px">
@@ -21,7 +21,7 @@
                 {% endfor %}
             </div>
         {% endfor %}
-        <a href="/home" class="btn btn-default">Home</a>
+        <a href="/" class="btn btn-default">Home</a>
     </div>
 </body>
 </html>
