@@ -78,29 +78,29 @@ def history(request):
 def check_win(pl, m, n, diagonal, num):  # проверка на выиграшные комбинации
     win = []
     b = mat_to_str(m)
-    for i in range(n):
+    for i in range(0, n ** 2, n):
         lst = range(n)
         one_win = []
-        all(b[i] == b[i + j] for j in lst)
-        for k in lst:
-            one_win.append(b[i + k])
-        win.append(one_win)  # выиграши по вертикали
-    for i in range(0, n):
+        if all(b[i] == b[i + j] for j in lst) and b[i] != 0:
+            for k in lst:
+                one_win.append(b[i + k])
+            win.append(one_win)  # выиграши по горизонтали
+    for i in range(n):
         lst = range(0, n ** 2 - n + 1, n)
         one_win = []
-        all(b[i] == b[i + j] for j in lst)
-        for k in lst:
-            one_win.append(b[i + k])
-        win.append(one_win)  # выиграши по горизнтали
+        if all(b[i] == b[i + j] for j in lst) and b[i] != 0:
+            for k in lst:
+                one_win.append(b[i + k])
+            win.append(one_win)  # выиграши по вертикали
     if diagonal == 'on':
         di1 = list(range(0, n * (n - 2), n)) + list(range(1, n - 2))
         for i in di1:
             lst = range(i, n ** 2, n + 1)
             one_win = []
-            all(b[i] == b[j] for j in lst)
-            for k in lst:
-                one_win.append(b[k])
-            win.append(one_win)  # диагонали слева направо
+            if all(b[i] == b[j] for j in lst):
+                for k in lst:
+                    one_win.append(b[k])
+                win.append(one_win)  # диагонали слева направо
         di2 = list(range(n - 1, n * (n - 2), n)) + list(range(2, n - 1))
         for i in di2:
             if i < n:
@@ -108,10 +108,10 @@ def check_win(pl, m, n, diagonal, num):  # проверка на выиграш�
             else:
                 lst = range(i, n ** 2, n - 1)
             one_win = []
-            all(b[i] == b[j] for j in lst)
-            for k in lst:
-                one_win.append(b[k])
-            win.append(one_win)  # диагонали справа налево
+            if all(b[i] == b[j] for j in lst) and b[i] != 0:
+                for k in lst:
+                    one_win.append(b[k])
+                win.append(one_win)  # диагонали справа налево
     for i in win:
         count = 0
         for j in i:
